@@ -201,3 +201,14 @@ class TestSCSS( unittest.TestCase ):
         test = ".test{margin:0 auto}"
         out = self.parser.loads(src)
         self.assertEqual(test, out)
+
+    def test_multiword_parameters(self):
+        src = """
+            .test {
+                background-image: linear-gradient(center bottom, #ffffff %1, #000000 %100);
+            }
+        """
+        test = ".test{background-image:linear-gradient(center bottom, #ffffff %1, #000000 %100)}"
+
+        out = self.parser.loads(src)
+        self.assertEqual(test, out)
